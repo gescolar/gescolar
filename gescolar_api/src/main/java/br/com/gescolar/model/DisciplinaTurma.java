@@ -26,6 +26,7 @@ public class DisciplinaTurma implements Serializable {
 	private Long idDisciplinaTurma;
 	
 	@NotNull
+	@Column(name="quant_periodos")
 	private Integer quantPeriodosSemana;
 	
 	@NotNull

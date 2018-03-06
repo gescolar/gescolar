@@ -44,8 +44,11 @@ public class Turma implements Serializable {
 	
 	private String sala;
 	
+	@Column(name="quantidade_periodos")
 	private Integer quantPeriodosSemana;
 	
+	@Column(name="quantidade_dias")
+	private Integer quantDias;
 	
 	
 	public Long getIdTurma() {

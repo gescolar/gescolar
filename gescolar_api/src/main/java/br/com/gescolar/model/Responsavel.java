@@ -17,6 +17,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name="responsavel")
@@ -29,17 +32,26 @@ public class Responsavel implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_responsavel")
 	private Long idResponsavel;
+	
+	@NotNull
+	@NotBlank
+	@Length(min=4, max= 50)
 	private String nome;
 	
 	@NotNull
+	@Length(max= 50)
 	private String parentesco;
 	
+	@Length(max= 50)
 	private String telefone;
 	
+	@Length(max= 50)
 	private String celular;
 	
+	@Length(max= 50)
 	private String email;
 	
+	@Length(max= 50)
 	private String sexo;
 	
 	private byte[] foto;

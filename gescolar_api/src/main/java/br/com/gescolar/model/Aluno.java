@@ -14,8 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
@@ -30,15 +34,17 @@ public class Aluno  implements Serializable{
 	private Long idAluno;
 	
 	@NotNull
+	@Length(min=4, max=50)
+	@NotBlank
 	private String nome;
 	
 	private byte[] foto;
 	
-	@NotNull
+	@Length(max=50)
 	private String matricula;
 	
 	@NotNull
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	

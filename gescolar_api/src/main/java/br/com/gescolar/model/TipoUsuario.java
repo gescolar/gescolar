@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name="TIPO_USUARIO")
@@ -23,8 +26,10 @@ public class TipoUsuario implements Serializable {
 	@Column(name="id_tipo_usuario")
 	private Long idTipoUsuario;
 	
+	@NotBlank
 	@NotNull
-	@Column(name="tipo_usuario")
+	@Length(max=45)
+	@Column(name="desc_tipo_usurio")
 	private String tipoUsuario;
 	
 	

@@ -10,9 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
@@ -23,24 +26,26 @@ public class Professor implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_periodo_letivo")
+	@Column(name="id_professor")
 	private Long idProfessor;
 	
 	@NotNull
+	@NotBlank
+	@Length(min=4,max=50)
 	private String nome;
 	
+	@Length(max=50)
 	private String celular;
-	
+	@Length(max=50)
 	private String telefone;
-	
+	@Length(max=50)
 	private String email;
-	
 	private byte[] foto;
-	
+	@Length(max=2)
 	private String sexo;
 	
 	@NotNull
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 	

@@ -27,6 +27,7 @@ public class Disciplina implements Serializable {
 	@NotNull
 	private String nome;
 	
+	@Column(name="desc")
 	private String descricao;
 	
 	public Long getIdDiscipla() {

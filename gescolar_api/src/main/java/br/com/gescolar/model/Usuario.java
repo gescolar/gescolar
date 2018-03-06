@@ -13,6 +13,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name="USUARIO")
@@ -26,9 +29,13 @@ public class Usuario implements Serializable {
 	private Long idUsuario;
 	
 	@NotNull
+	@Length(min=4, max=20)
+	@NotBlank
 	private String login;
 	
 	@NotNull
+	@Length(min=6, max=20)
+	@NotBlank
 	private String senha;
 	
 	@OneToOne
