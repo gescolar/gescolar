@@ -1,12 +1,12 @@
 package br.com.gescolar.repository;
 
 
-import java.io.NotActiveException;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import br.com.gescolar.model.NotaAluno;
 
 
-public interface NotaAlunoRepository extends JpaRepository<NotActiveException, Long>{
+
+public interface NotaAlunoRepository extends JpaRepository<NotaAluno, Long>{
 	
 }
