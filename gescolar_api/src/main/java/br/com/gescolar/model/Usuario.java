@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,11 +35,10 @@ public class Usuario implements Serializable {
 	private String login;
 	
 	@NotNull
-	@Length(min=6, max=20)
 	@NotBlank
 	private String senha;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="id_tipo_usuario")
 	private TipoUsuario tipoUsuario;
 	

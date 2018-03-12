@@ -32,6 +32,8 @@ public class TipoUsuario implements Serializable {
 	@Column(name="desc_tipo_usurio")
 	private String tipoUsuario;
 	
+	@Column(name="role")
+	private String regra;
 	
 	public Long getIdTipoUsuario() {
 		return idTipoUsuario;
@@ -75,6 +77,12 @@ public class TipoUsuario implements Serializable {
 		} else if (!tipoUsuario.equals(other.tipoUsuario))
 			return false;
 		return true;
+	}
+	public String getRegra() {
+		return regra;
+	}
+	public void setRegra(String regra) {
+		this.regra = regra;
 	}
 	
 	
