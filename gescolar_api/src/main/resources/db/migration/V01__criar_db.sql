@@ -113,11 +113,11 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `gescolar`.`professor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`professor` (
-  `id_professor` INT(11) NOT NULL,
+  `id_professor` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `celular` VARCHAR(50) NULL DEFAULT NULL,
   `id_usuario` INT(11) NOT NULL,
-  `foto` BLOB NULL DEFAULT NULL,
+  `foto` VARCHAR(1000) NULL DEFAULT NULL,
   `email` VARCHAR(50) NULL,
   `telefone` VARCHAR(50) NULL,
   `sexo` VARCHAR(2) NULL,

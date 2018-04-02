@@ -1,9 +1,9 @@
 ALTER TABLE `gescolar`.`tipo_usuario` 
 ADD COLUMN `role` VARCHAR(45) NULL AFTER `desc_tipo_usurio`;
 
-INSERT INTO `gescolar`.`tipo_usuario` (`id_tipo_usuario`, `desc_tipo_usurio`, `role`) VALUES ('1', 'Administrador', 'ADM_ROLE');
-INSERT INTO `gescolar`.`tipo_usuario` (`id_tipo_usuario`, `desc_tipo_usurio`, `role`) VALUES ('2', 'Professor', 'PRO_ROLE');
-INSERT INTO `gescolar`.`tipo_usuario` (`id_tipo_usuario`, `desc_tipo_usurio`, `role`) VALUES ('3', 'Aluno / Resposável', 'ALU_RESP_ROLE');
+INSERT INTO `gescolar`.`tipo_usuario` (`id_tipo_usuario`, `desc_tipo_usurio`, `role`) VALUES ('1', 'ADIM', 'ADM_ROLE');
+INSERT INTO `gescolar`.`tipo_usuario` (`id_tipo_usuario`, `desc_tipo_usurio`, `role`) VALUES ('2', 'PROFESSOR', 'PRO_ROLE');
+INSERT INTO `gescolar`.`tipo_usuario` (`id_tipo_usuario`, `desc_tipo_usurio`, `role`) VALUES ('3', 'ALUNO_RESPONSSAVEL', 'ALU_RESP_ROLE');
 
 
 ALTER TABLE `gescolar`.`usuario` 

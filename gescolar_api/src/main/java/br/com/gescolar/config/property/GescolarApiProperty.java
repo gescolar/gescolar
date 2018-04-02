@@ -36,5 +36,38 @@ public class GescolarApiProperty {
 		}
 
 	}
+	
+public static class S3 {
+		
+		private String accessKeyId;
+		
+		private String secretAccessKey;
+		
+		private String bucket = "gescolar";
+		
+		public String getBucket() {
+			return bucket;
+		}
+		
+		public void setBucket(String bucket) {
+			this.bucket = bucket;
+		}
+
+		public String getAccessKeyId() {
+			return accessKeyId;
+		}
+
+		public void setAccessKeyId(String accessKeyId) {
+			this.accessKeyId = accessKeyId;
+		}
+
+		public String getSecretAccessKey() {
+			return secretAccessKey;
+		}
+
+		public void setSecretAccessKey(String secretAccessKey) {
+			this.secretAccessKey = secretAccessKey;
+		}
+	}
 
 }

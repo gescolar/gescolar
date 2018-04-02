@@ -9,4 +9,9 @@ public class GeradorSenha {
 		System.out.println(encoder.encode("teste"));
 	}
 	
+	
+	public static String gerarCryptSenha(String senha) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder.encode(senha);
+	}
 }
