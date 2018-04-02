@@ -57,7 +57,7 @@ public class Professor implements Serializable{
 	private String foto;
 	
 	@Transient
-	private String  urlfoto;
+	private String  urlFoto;
 	
 
 	public Long getIdProfessor() {
@@ -124,12 +124,14 @@ public class Professor implements Serializable{
 		this.foto = foto;
 	}
 
-	public String getUrlfoto() {
-		return urlfoto;
+	
+
+	public String getUrlFoto() {
+		return urlFoto;
 	}
 
-	public void setUrlfoto(String urlfoto) {
-		this.urlfoto = urlfoto;
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class UrlFotoListener {
 		if (p != null) {
 			if (StringUtils.hasText(p.getFoto())) {
 				S3 s3 = GescolarApplication.getBean(S3.class);
-				p.setUrlfoto(s3.configurarUrl(p.getFoto()));
+				p.setUrlFoto(s3.configurarUrl(p.getFoto()));
 			}
 		}
 	}
