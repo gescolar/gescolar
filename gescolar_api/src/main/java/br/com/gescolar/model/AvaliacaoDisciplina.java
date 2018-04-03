@@ -23,8 +23,8 @@ public class AvaliacaoDisciplina implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_avaliacao_disciplina")
-	private Long idAvaliacaoDisciplina;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotNull
 	private Double peso;
@@ -44,63 +44,71 @@ public class AvaliacaoDisciplina implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "id_disciplina_turma")
 	private DisciplinaTurma disciplinaTurma;
-	
-	
-	
-	public Long getIdAvaliacaoDisciplina() {
-		return idAvaliacaoDisciplina;
+
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setIdAvaliacaoDisciplina(Long idAvaliacaoDisciplina) {
-		this.idAvaliacaoDisciplina = idAvaliacaoDisciplina;
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
+
 	public Double getPeso() {
 		return peso;
 	}
+
 	public void setPeso(Double peso) {
 		this.peso = peso;
 	}
+
 	public String getTipo() {
 		return tipo;
 	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
 	public String getAvaliacao() {
 		return avaliacao;
 	}
+
 	public void setAvaliacao(String avaliacao) {
 		this.avaliacao = avaliacao;
 	}
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 	public Date getData() {
 		return data;
 	}
+
 	public void setData(Date data) {
 		this.data = data;
 	}
+
 	public DisciplinaTurma getDisciplinaTurma() {
 		return disciplinaTurma;
 	}
+
 	public void setDisciplinaTurma(DisciplinaTurma disciplinaTurma) {
 		this.disciplinaTurma = disciplinaTurma;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idAvaliacaoDisciplina == null) ? 0 : idAvaliacaoDisciplina.hashCode());
-		result = prime * result + ((peso == null) ? 0 : peso.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -110,23 +118,14 @@ public class AvaliacaoDisciplina implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		AvaliacaoDisciplina other = (AvaliacaoDisciplina) obj;
-		if (idAvaliacaoDisciplina == null) {
-			if (other.idAvaliacaoDisciplina != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idAvaliacaoDisciplina.equals(other.idAvaliacaoDisciplina))
-			return false;
-		if (peso == null) {
-			if (other.peso != null)
-				return false;
-		} else if (!peso.equals(other.peso))
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}
+	
 	
 	
 	

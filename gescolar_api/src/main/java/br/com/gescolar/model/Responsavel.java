@@ -30,8 +30,8 @@ public class Responsavel implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_responsavel")
-	private Long idResponsavel;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotNull
 	@NotBlank
@@ -58,89 +58,126 @@ public class Responsavel implements Serializable{
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "codigo_usuario")
 	private Usuario usuario;
 	
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "responsavel_aluno", 
-	joinColumns = @JoinColumn(name = "id_responsavel"), 
-	inverseJoinColumns = @JoinColumn(name = "id_aluno"))
+	joinColumns = @JoinColumn(name = "codigo_responsavel"), 
+	inverseJoinColumns = @JoinColumn(name = "codigo_aluno"))
 	private List<Aluno> alunosList;
-	
-	
-	
-	public Long getIdResponsavel() {
-		return idResponsavel;
+
+
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setIdResponsavel(Long idResponsavel) {
-		this.idResponsavel = idResponsavel;
+
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
+
+
 	public String getNome() {
 		return nome;
 	}
+
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+
 	public String getParentesco() {
 		return parentesco;
 	}
+
+
 	public void setParentesco(String parentesco) {
 		this.parentesco = parentesco;
 	}
+
+
 	public String getTelefone() {
 		return telefone;
 	}
+
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
+
+
 	public String getCelular() {
 		return celular;
 	}
+
+
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 	public String getSexo() {
 		return sexo;
 	}
+
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+
+
 	public byte[] getFoto() {
 		return foto;
 	}
+
+
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
-	public List<Aluno> getAlunosList() {
-		return alunosList;
-	}
-	public void setAlunosList(List<Aluno> alunosList) {
-		this.alunosList = alunosList;
-	}
+
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
+
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
-	
+
+
+	public List<Aluno> getAlunosList() {
+		return alunosList;
+	}
+
+
+	public void setAlunosList(List<Aluno> alunosList) {
+		this.alunosList = alunosList;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idResponsavel == null) ? 0 : idResponsavel.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -150,23 +187,16 @@ public class Responsavel implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Responsavel other = (Responsavel) obj;
-		if (idResponsavel == null) {
-			if (other.idResponsavel != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idResponsavel.equals(other.idResponsavel))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (telefone == null) {
-			if (other.telefone != null)
-				return false;
-		} else if (!telefone.equals(other.telefone))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}
+	
+	
+	
 	
 	
 }

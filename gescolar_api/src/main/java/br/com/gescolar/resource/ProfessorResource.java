@@ -41,7 +41,7 @@ public class ProfessorResource {
 	@PostMapping
 	public ResponseEntity<Professor> criar(@Valid @RequestBody Professor professor, HttpServletResponse response) {
 		Professor professorSalva = professorService.salvar(professor);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, professorSalva.getIdProfessor()));
+		publisher.publishEvent(new RecursoCriadoEvent(this, response, professorSalva.getCodigo()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(professorSalva);
 	}
 

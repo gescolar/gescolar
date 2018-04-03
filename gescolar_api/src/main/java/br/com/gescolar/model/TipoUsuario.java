@@ -23,8 +23,8 @@ public class TipoUsuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_tipo_usuario")
-	private Long idTipoUsuario;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotBlank
 	@NotNull
@@ -34,29 +34,39 @@ public class TipoUsuario implements Serializable {
 	
 	@Column(name="role")
 	private String regra;
-	
-	public Long getIdTipoUsuario() {
-		return idTipoUsuario;
+
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setIdTipoUsuario(Long idTipoUsuario) {
-		this.idTipoUsuario = idTipoUsuario;
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
+
 	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
+
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
-	
+
+	public String getRegra() {
+		return regra;
+	}
+
+	public void setRegra(String regra) {
+		this.regra = regra;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idTipoUsuario == null) ? 0 : idTipoUsuario.hashCode());
-		result = prime * result + ((tipoUsuario == null) ? 0 : tipoUsuario.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -66,24 +76,15 @@ public class TipoUsuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		TipoUsuario other = (TipoUsuario) obj;
-		if (idTipoUsuario == null) {
-			if (other.idTipoUsuario != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idTipoUsuario.equals(other.idTipoUsuario))
-			return false;
-		if (tipoUsuario == null) {
-			if (other.tipoUsuario != null)
-				return false;
-		} else if (!tipoUsuario.equals(other.tipoUsuario))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}
-	public String getRegra() {
-		return regra;
-	}
-	public void setRegra(String regra) {
-		this.regra = regra;
-	}
+	
+	
 	
 	
 	

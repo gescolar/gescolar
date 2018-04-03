@@ -22,8 +22,8 @@ public class DisciplinaTurma implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_discipla_turma")
-	private Long idDisciplinaTurma;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotNull
 	@Column(name="quant_periodos")
@@ -31,60 +31,67 @@ public class DisciplinaTurma implements Serializable {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "id_turma")
+	@JoinColumn(name = "codigo_turma")
 	private Turma turma;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "id_professor")
+	@JoinColumn(name = "codigo_professor")
 	private Professor professor;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "id_disciplina")
+	@JoinColumn(name = "codigo_disciplina")
 	private Disciplina disciplina;
-	
-	public Long getIdDisciplinaTurma() {
-		return idDisciplinaTurma;
+
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setIdDisciplinaTurma(Long idDisciplinaTurma) {
-		this.idDisciplinaTurma = idDisciplinaTurma;
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
-	
+
 	public Integer getQuantPeriodosSemana() {
 		return quantPeriodosSemana;
 	}
+
 	public void setQuantPeriodosSemana(Integer quantPeriodosSemana) {
 		this.quantPeriodosSemana = quantPeriodosSemana;
 	}
-	
+
 	public Turma getTurma() {
 		return turma;
 	}
+
 	public void setTurma(Turma turma) {
 		this.turma = turma;
 	}
+
 	public Professor getProfessor() {
 		return professor;
 	}
+
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
+
 	public Disciplina getDisciplina() {
 		return disciplina;
 	}
+
 	public void setDisciplina(Disciplina disciplina) {
 		this.disciplina = disciplina;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idDisciplinaTurma == null) ? 0 : idDisciplinaTurma.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -94,13 +101,15 @@ public class DisciplinaTurma implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		DisciplinaTurma other = (DisciplinaTurma) obj;
-		if (idDisciplinaTurma == null) {
-			if (other.idDisciplinaTurma != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idDisciplinaTurma.equals(other.idDisciplinaTurma))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 }

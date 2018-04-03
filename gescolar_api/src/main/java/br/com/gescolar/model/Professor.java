@@ -30,8 +30,8 @@ public class Professor implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_professor")
-	private Long idProfessor;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotNull
 	@NotBlank
@@ -44,6 +44,8 @@ public class Professor implements Serializable{
 	@Length(max=50)
 	private String telefone;
 	
+	@NotNull
+	@NotBlank
 	@Length(max=50)
 	private String email;
 	
@@ -51,7 +53,7 @@ public class Professor implements Serializable{
 	private String sexo;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "codigo_usuario")
 	private Usuario usuario;
 	
 	private String foto;
@@ -59,13 +61,14 @@ public class Professor implements Serializable{
 	@Transient
 	private String  urlFoto;
 	
+	
 
-	public Long getIdProfessor() {
-		return idProfessor;
+	public Long getCodigo() {
+		return codigo;
 	}
 
-	public void setIdProfessor(Long idProfessor) {
-		this.idProfessor = idProfessor;
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getNome() {
@@ -124,8 +127,6 @@ public class Professor implements Serializable{
 		this.foto = foto;
 	}
 
-	
-
 	public String getUrlFoto() {
 		return urlFoto;
 	}
@@ -138,8 +139,7 @@ public class Professor implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idProfessor == null) ? 0 : idProfessor.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 
@@ -152,17 +152,17 @@ public class Professor implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Professor other = (Professor) obj;
-		if (idProfessor == null) {
-			if (other.idProfessor != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idProfessor.equals(other.idProfessor))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}
+
 	
+
+	
+	
+
 }

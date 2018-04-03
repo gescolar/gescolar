@@ -30,8 +30,8 @@ public class Aluno  implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_aluno")
-	private Long idAluno;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotNull
 	@Length(min=4, max=50)
@@ -45,75 +45,94 @@ public class Aluno  implements Serializable{
 	
 	@NotNull
 	@OneToOne
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "codigo_usuario")
 	private Usuario usuario;
 	
 	private String sexo;
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "responsavel_aluno", 
-	joinColumns = @JoinColumn(name = "id_aluno"), 
-	inverseJoinColumns = @JoinColumn(name = "id_responsavel"))
+	joinColumns = @JoinColumn(name = "codigo_aluno"), 
+	inverseJoinColumns = @JoinColumn(name = "codigo_responsavel"))
 	private List<Responsavel> responsaveisList;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="id_turma")
+	@JoinColumn(name="codigo_turma")
 	private Turma turma;
-	
-	public Long getIdAluno() {
-		return idAluno;
+
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setIdAluno(Long idAluno) {
-		this.idAluno = idAluno;
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public byte[] getFoto() {
 		return foto;
 	}
+
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
+
 	public String getMatricula() {
 		return matricula;
 	}
+
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	public List<Responsavel> getResponsaveisList() {
-		return responsaveisList;
-	}
-	public void setResponsaveisList(List<Responsavel> responsaveisList) {
-		this.responsaveisList = responsaveisList;
-	}
+
 	public String getSexo() {
 		return sexo;
 	}
+
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
-	
+
+	public List<Responsavel> getResponsaveisList() {
+		return responsaveisList;
+	}
+
+	public void setResponsaveisList(List<Responsavel> responsaveisList) {
+		this.responsaveisList = responsaveisList;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idAluno == null) ? 0 : idAluno.hashCode());
-		result = prime * result + ((matricula == null) ? 0 : matricula.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -123,20 +142,10 @@ public class Aluno  implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Aluno other = (Aluno) obj;
-		if (idAluno == null) {
-			if (other.idAluno != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idAluno.equals(other.idAluno))
-			return false;
-		if (matricula == null) {
-			if (other.matricula != null)
-				return false;
-		} else if (!matricula.equals(other.matricula))
-			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
 	}

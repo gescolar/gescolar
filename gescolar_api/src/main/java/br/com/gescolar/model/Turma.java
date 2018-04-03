@@ -26,12 +26,12 @@ public class Turma implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_turma")
-	private Long idTurma;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "id_periodo_letivo")
+	@JoinColumn(name = "codigo_periodo_letivo")
 	private PeriodoLetivo periodoLetivo;
 	
 	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -50,63 +50,80 @@ public class Turma implements Serializable {
 	@Column(name="quantidade_dias")
 	private Integer quantDias;
 	
-	
-	public Long getIdTurma() {
-		return idTurma;
+	private Integer vagas;
+
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setIdTurma(Long idTurma) {
-		this.idTurma = idTurma;
+
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
-	public String getSala() {
-		return sala;
-	}
-	public void setSala(String sala) {
-		this.sala = sala;
-	}
+
 	public PeriodoLetivo getPeriodoLetivo() {
 		return periodoLetivo;
 	}
+
 	public void setPeriodoLetivo(PeriodoLetivo periodoLetivo) {
 		this.periodoLetivo = periodoLetivo;
 	}
-	public String getSerie() {
-		return serie;
-	}
-	public void setSerie(String serie) {
-		this.serie = serie;
-	}
-	
-	public Integer getQuantPeriodosSemana() {
-		return quantPeriodosSemana;
-	}
-	public void setQuantPeriodosSemana(Integer quantPeriodosSemana) {
-		this.quantPeriodosSemana = quantPeriodosSemana;
-	}
+
 	public List<Aluno> getAlunosList() {
 		return alunosList;
 	}
+
 	public void setAlunosList(List<Aluno> alunosList) {
 		this.alunosList = alunosList;
 	}
+
 	public List<DisciplinaTurma> getDisciplinasList() {
 		return disciplinasList;
 	}
+
 	public void setDisciplinasList(List<DisciplinaTurma> disciplinasList) {
 		this.disciplinasList = disciplinasList;
 	}
-	
-	
+
+	public String getSerie() {
+		return serie;
+	}
+
+	public void setSerie(String serie) {
+		this.serie = serie;
+	}
+
+	public String getSala() {
+		return sala;
+	}
+
+	public void setSala(String sala) {
+		this.sala = sala;
+	}
+
+	public Integer getQuantPeriodosSemana() {
+		return quantPeriodosSemana;
+	}
+
+	public void setQuantPeriodosSemana(Integer quantPeriodosSemana) {
+		this.quantPeriodosSemana = quantPeriodosSemana;
+	}
+
+	public Integer getQuantDias() {
+		return quantDias;
+	}
+
+	public void setQuantDias(Integer quantDias) {
+		this.quantDias = quantDias;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idTurma == null) ? 0 : idTurma.hashCode());
-		result = prime * result + ((periodoLetivo == null) ? 0 : periodoLetivo.hashCode());
-		result = prime * result + ((quantPeriodosSemana == null) ? 0 : quantPeriodosSemana.hashCode());
-		result = prime * result + ((sala == null) ? 0 : sala.hashCode());
-		result = prime * result + ((serie == null) ? 0 : serie.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -116,32 +133,20 @@ public class Turma implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Turma other = (Turma) obj;
-		if (idTurma == null) {
-			if (other.idTurma != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!idTurma.equals(other.idTurma))
-			return false;
-		if (periodoLetivo == null) {
-			if (other.periodoLetivo != null)
-				return false;
-		} else if (!periodoLetivo.equals(other.periodoLetivo))
-			return false;
-		if (quantPeriodosSemana == null) {
-			if (other.quantPeriodosSemana != null)
-				return false;
-		} else if (!quantPeriodosSemana.equals(other.quantPeriodosSemana))
-			return false;
-		if (sala == null) {
-			if (other.sala != null)
-				return false;
-		} else if (!sala.equals(other.sala))
-			return false;
-		if (serie == null) {
-			if (other.serie != null)
-				return false;
-		} else if (!serie.equals(other.serie))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	public Integer getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(Integer vagas) {
+		this.vagas = vagas;
 	}
 	
 	

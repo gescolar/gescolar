@@ -28,18 +28,19 @@ public class Boletim implements Serializable {
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "id_disciplina_turma")
+	@JoinColumn(name = "codigo_disciplina_turma")
 	private DisciplinaTurma disciplinaTurma;
 	
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name = "id_aluno")
+	@JoinColumn(name = "codigo_aluno")
 	private Aluno aluno;
 	
 	@NotNull
 	private Double nota;
 	
 	@NotNull
+	@Column(name="bi_tri")
 	private String bimestreTrimestre;
 	
 	

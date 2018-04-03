@@ -21,8 +21,8 @@ public class PeriodoLetivo implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_periodo_letivo")
-	private Long idPeriodoLetivo;
+	@Column(name="codigo")
+	private Long codigo;
 	
 	@NotNull
 	@Column(name="data_ini")
@@ -38,11 +38,13 @@ public class PeriodoLetivo implements Serializable{
 	@Column(name="minutos_periodo")
 	private Integer minPeriodo;
 	
-	public Long getIdPeriodoLetivo() {
-		return idPeriodoLetivo;
+	
+	
+	public Long getCodigo() {
+		return codigo;
 	}
-	public void setIdPeriodoLetivo(Long idPeriodoLetivo) {
-		this.idPeriodoLetivo = idPeriodoLetivo;
+	public void setCodigo(Long codigo) {
+		this.codigo = codigo;
 	}
 	public LocalDate getDataIni() {
 		return dataIni;
@@ -74,6 +76,32 @@ public class PeriodoLetivo implements Serializable{
 	public void setMinPeriodo(Integer minPeriodo) {
 		this.minPeriodo = minPeriodo;
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PeriodoLetivo other = (PeriodoLetivo) obj;
+		if (codigo == null) {
+			if (other.codigo != null)
+				return false;
+		} else if (!codigo.equals(other.codigo))
+			return false;
+		return true;
+	}
+	
+	
+	
 	
 	
 	
