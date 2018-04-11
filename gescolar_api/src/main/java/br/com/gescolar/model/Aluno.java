@@ -16,6 +16,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
@@ -38,7 +39,10 @@ public class Aluno  implements Serializable{
 	@NotBlank
 	private String nome;
 	
-	private byte[] foto;
+	private String foto;
+	
+	@Transient
+	private String  urlFoto;
 	
 	@Length(max=50)
 	private String matricula;
@@ -77,12 +81,20 @@ public class Aluno  implements Serializable{
 		this.nome = nome;
 	}
 
-	public byte[] getFoto() {
+	public String getFoto() {
 		return foto;
 	}
 
-	public void setFoto(byte[] foto) {
+	public void setFoto(String foto) {
 		this.foto = foto;
+	}
+
+	public String getUrlFoto() {
+		return urlFoto;
+	}
+
+	public void setUrlFoto(String urlFoto) {
+		this.urlFoto = urlFoto;
 	}
 
 	public String getMatricula() {
