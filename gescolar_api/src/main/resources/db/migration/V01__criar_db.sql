@@ -55,7 +55,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `gescolar`.`periodo_letivo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`periodo_letivo` (
-  `codigo` INT(11) NOT NULL,
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `data_ini` DATE NOT NULL,
   `data_fim` DATE NOT NULL,
   `turno` VARCHAR(45) NOT NULL,
@@ -71,8 +71,9 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`turma` (
   `codigo` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
   `sala` VARCHAR(45) NULL DEFAULT NULL,
-  `quantidade_periodos` INT(11) NULL DEFAULT NULL,
+  `quant_periodos` INT(11) NULL DEFAULT NULL,
   `quant_dias` INT(11) NULL DEFAULT NULL,
   `serie` VARCHAR(45) NULL DEFAULT NULL,
   `codigo_periodo_letivo` INT(11) NOT NULL,
@@ -92,7 +93,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `gescolar`.`aluno`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`aluno` (
-  `codigo` INT(11) NOT NULL,
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NULL DEFAULT NULL,
   `foto` VARCHAR(1000) NULL DEFAULT NULL,
   `matricula` VARCHAR(50) NULL DEFAULT NULL,
@@ -188,7 +189,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `gescolar`.`avaliacao_disciplina`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`avaliacao_disciplina` (
-  `codigo` INT(11) NOT NULL,
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `peso` DECIMAL(1,1) NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
   `descriacao` VARCHAR(45) NOT NULL,
@@ -208,7 +209,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `gescolar`.`chamada`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`chamada` (
-  `id_chamada` INT(11) NOT NULL,
+  `id_chamada` INT(11) NOT NULL AUTO_INCREMENT,
   `presenca` TINYINT(1) NOT NULL,
   `data` DATE NOT NULL,
   PRIMARY KEY (`id_chamada`))
@@ -245,7 +246,7 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `gescolar`.`responsavel`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`responsavel` (
-  `codigo` INT(11) NOT NULL,
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `parentesco` VARCHAR(50) NOT NULL,
   `telefone` VARCHAR(50) NULL DEFAULT NULL,
@@ -265,10 +266,10 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `gescolar`.`responsave_aluno`
+-- Table `gescolar`.`responsavel_aluno`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gescolar`.`responsave_aluno` (
-  `codigo_aluno` INT(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `gescolar`.`responsavel_aluno` (
+  `codigo_aluno` INT(11) NOT NULL AUTO_INCREMENT,
   `codigo_responsavel` INT(11) NOT NULL,
   PRIMARY KEY (`codigo_aluno`, `codigo_responsavel`),
   INDEX `fk_aluno_has_responsavel_responsavel1_idx` (`codigo_responsavel` ASC),

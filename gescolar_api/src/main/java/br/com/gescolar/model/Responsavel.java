@@ -33,6 +33,7 @@ public class Responsavel implements Serializable{
 	@Column(name="codigo")
 	private Long codigo;
 	
+	
 	@NotNull
 	@NotBlank
 	@Length(min=4, max= 50)
@@ -54,7 +55,6 @@ public class Responsavel implements Serializable{
 	@Length(max= 50)
 	private String sexo;
 	
-	private byte[] foto;
 	
 	@NotNull
 	@ManyToOne
@@ -136,16 +136,6 @@ public class Responsavel implements Serializable{
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-
-	public byte[] getFoto() {
-		return foto;
-	}
-
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
 	}
 
 

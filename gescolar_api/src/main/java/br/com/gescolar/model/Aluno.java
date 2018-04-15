@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,10 +23,13 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.com.gescolar.repository.listener.S3UrlFoto;
+import br.com.gescolar.repository.listener.UrlFotoListener;
 
+@EntityListeners(UrlFotoListener.class)
 @Entity
 @Table(name="ALUNO")
-public class Aluno  implements Serializable{
+public class Aluno  implements Serializable, S3UrlFoto{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -47,7 +51,6 @@ public class Aluno  implements Serializable{
 	@Length(max=50)
 	private String matricula;
 	
-	@NotNull
 	@OneToOne
 	@JoinColumn(name = "codigo_usuario")
 	private Usuario usuario;

@@ -17,6 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="TURMA")
@@ -30,13 +34,21 @@ public class Turma implements Serializable {
 	private Long codigo;
 	
 	@NotNull
+	@NotBlank
+	@Column(name="nome")
+	private String nome;
+	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_periodo_letivo")
+	@JsonIgnore
 	private PeriodoLetivo periodoLetivo;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Aluno> alunosList;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<DisciplinaTurma> disciplinasList;
 	
@@ -44,10 +56,10 @@ public class Turma implements Serializable {
 	
 	private String sala;
 	
-	@Column(name="quantidade_periodos")
+	@Column(name="quant_periodos")
 	private Integer quantPeriodosSemana;
 	
-	@Column(name="quantidade_dias")
+	@Column(name="quant_dias")
 	private Integer quantDias;
 	
 	private Integer vagas;
@@ -116,6 +128,23 @@ public class Turma implements Serializable {
 		this.quantDias = quantDias;
 	}
 
+	
+	public Integer getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(Integer vagas) {
+		this.vagas = vagas;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -141,13 +170,7 @@ public class Turma implements Serializable {
 		return true;
 	}
 
-	public Integer getVagas() {
-		return vagas;
-	}
-
-	public void setVagas(Integer vagas) {
-		this.vagas = vagas;
-	}
+	
 	
 	
 	

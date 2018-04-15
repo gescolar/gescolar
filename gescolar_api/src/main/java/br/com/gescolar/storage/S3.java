@@ -1,6 +1,8 @@
 package br.com.gescolar.storage;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
@@ -42,7 +44,7 @@ public class S3 {
 	@Autowired
 	private ImageService imageService;
 	
-	public String salvarTemporariamente(MultipartFile arquivo) {
+	public String salvarTemporariamente(MultipartFile arquivo) throws IOException {
 		AccessControlList acl = new AccessControlList();
 		acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
 		
@@ -52,14 +54,17 @@ public class S3 {
 		jpgImage = imageService.resize(jpgImage, size);
 		
 		
+		InputStream inputImage = imageService.getInputStream(jpgImage,"jpg");
 		
+			
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(arquivo.getContentType());
+		objectMetadata.setContentLength(inputImage.available());
 		
 		PutObjectRequest putObjectRequest = new PutObjectRequest(
 				bucket,
 				nomeUnico,
-				imageService.getInputStream(jpgImage,"jpg"), 
+				inputImage, 
 				objectMetadata)
 				.withAccessControlList(acl);
 		

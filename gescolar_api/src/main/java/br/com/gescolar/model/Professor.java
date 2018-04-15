@@ -19,12 +19,13 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
+import br.com.gescolar.repository.listener.S3UrlFoto;
 import br.com.gescolar.repository.listener.UrlFotoListener;
 
 @EntityListeners(UrlFotoListener.class)
 @Entity
 @Table(name="PROFESSOR")
-public class Professor implements Serializable{
+public class Professor implements Serializable,S3UrlFoto{
 	
 	private static final long serialVersionUID = 1L;
 

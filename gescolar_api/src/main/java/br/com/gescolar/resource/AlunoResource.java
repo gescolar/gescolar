@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,8 +49,8 @@ public class AlunoResource {
 
 	@GetMapping("/{codigo}")
 	public ResponseEntity<Aluno> buscarPeloCodigo(@PathVariable Long codigo) {
-		Aluno Aluno = alunoRepository.findOne(codigo);
-		return Aluno != null ? ResponseEntity.ok(Aluno) : ResponseEntity.notFound().build();
+		Aluno aluno = alunoRepository.findOne(codigo);
+		return aluno != null ? ResponseEntity.ok(aluno) : ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping("/{codigo}")
@@ -59,9 +60,9 @@ public class AlunoResource {
 	}
 	
 	@PutMapping("/{codigo}")
-	public ResponseEntity<Aluno> atualizar(@PathVariable Long codigo, @Valid @RequestBody Aluno Aluno) {
-		Aluno AlunoSalva = alunoService.atualizar(codigo, Aluno);
-		return ResponseEntity.ok(AlunoSalva);
+	public ResponseEntity<Aluno> atualizar(@PathVariable Long codigo, @Valid @RequestBody Aluno aluno) {
+		Aluno AlunoSalvo = alunoService.atualizar(codigo, aluno);
+		return ResponseEntity.ok(AlunoSalvo);
 	}
 	
 	@GetMapping
@@ -71,8 +72,10 @@ public class AlunoResource {
 	
 	@GetMapping("/matriculaExistente/{matricula}")
 	@ResponseBody
-	public ResponseEntity<Boolean> isValid(@PathVariable String matricula) {
-	    return ResponseEntity.ok(alunoRepository.existsByMatricula(matricula));
+	public ResponseEntity<Boolean> isValid(@PathVariable String matricula, @RequestParam (required = false, defaultValue = "") String codigo) {
+		Long codigoLong = null;
+		if (!StringUtils.isEmpty(codigo)) codigoLong = new Long(codigo); 
+		return ResponseEntity.ok(alunoService.verificaMatricula(matricula,codigoLong));
 	}
 
 }
