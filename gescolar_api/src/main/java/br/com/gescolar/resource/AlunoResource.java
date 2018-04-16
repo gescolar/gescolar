@@ -66,8 +66,10 @@ public class AlunoResource {
 	}
 	
 	@GetMapping
-	public Page<Aluno> pesquisar(@RequestParam(required = false, defaultValue = "%") String nome, Pageable pageable) {
-		return alunoRepository.findByNomeContaining(nome, pageable);
+	public Page<Aluno> pesquisar(@RequestParam(required = false, defaultValue = "%") String nome,
+								 @RequestParam(required = false, defaultValue = "%") String matricula,
+								 Pageable pageable) {
+		return alunoRepository.findByNomeContainingAndMatriculaContaining(nome,matricula,pageable);
 	}
 	
 	@GetMapping("/matriculaExistente/{matricula}")
@@ -78,4 +80,5 @@ public class AlunoResource {
 		return ResponseEntity.ok(alunoService.verificaMatricula(matricula,codigoLong));
 	}
 
+	
 }

@@ -10,7 +10,7 @@ import br.com.gescolar.model.Aluno;
 
 public interface AlunoRepository  extends JpaRepository<Aluno, Long> {
 	
-	public Page<Aluno> findByNomeContaining(String nome, Pageable pageable);
+	public Page<Aluno> findByNomeContainingAndMatriculaContaining(String nome, String matricula, Pageable pageable);
 	
 	public boolean existsByMatricula(String matricula);
 
