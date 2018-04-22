@@ -13,4 +13,6 @@ import br.com.gescolar.model.Professor;
 public interface ProfessorRepository extends JpaRepository<Professor, Long>{
 	
 	public Page<Professor> findByNomeContaining(String nome, Pageable pageable);
+
+	public boolean existsByCpf(String cpf);
 }

@@ -23,13 +23,13 @@ public class ProfessorService {
 	private FotoService fotoService;
 	
 	public Professor atualizar(Long codigo, Professor professor) {
-		Professor professorSalvo = buscarPessoaPeloCodigo(codigo);
+		Professor professorSalvo = buscarProfessorPeloCodigo(codigo);
 		fotoService.atualizar(professorSalvo.getFoto(), professor.getFoto());
 		BeanUtils.copyProperties(professor, professorSalvo, "idProfessor","usuario");
 		return professorRepository.save(professorSalvo);
 	}
 
-	public Professor buscarPessoaPeloCodigo(Long codigo) {
+	public Professor buscarProfessorPeloCodigo(Long codigo) {
 		Professor professorSalvo = professorRepository.findOne(codigo);
 		if (professorSalvo == null) {
 			throw new EmptyResultDataAccessException(1);
@@ -39,10 +39,18 @@ public class ProfessorService {
 	
 	@Transactional
 	public Professor salvar(Professor professor) {
-		Usuario usuario = usuarioService.gerarUsuarioDefault(professor.getNome(), TipoUsuarioEnum.PROFESSOR);
+		Usuario usuario = usuarioService.gerarUsuarioDefault(professor.getCpf(), TipoUsuarioEnum.PROFESSOR);
 		professor.setUsuario(usuario);
 		fotoService.salvar(professor.getFoto());
 		return this.professorRepository.save(professor);
+	}
+
+	public boolean verificaCpf(String cpf, Long codigo) {
+		if (codigo != null) {
+			Professor professor = this.buscarProfessorPeloCodigo(codigo);
+			if (professor.getCpf().equals(cpf)) return false;
+		}
+		return professorRepository.existsByCpf(cpf);
 	}
 	
 }

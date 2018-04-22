@@ -43,6 +43,11 @@ public class Professor implements Serializable,S3UrlFoto{
 	private String celular;
 	
 	@Length(max=50)
+	@NotNull
+	@NotBlank
+	private String cpf;
+	
+	@Length(max=50)
 	private String telefone;
 	
 	@NotNull
@@ -134,6 +139,15 @@ public class Professor implements Serializable,S3UrlFoto{
 
 	public void setUrlFoto(String urlFoto) {
 		this.urlFoto = urlFoto;
+	}
+	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	@Override
