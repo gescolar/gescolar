@@ -25,7 +25,7 @@ public class ProfessorService {
 	public Professor atualizar(Long codigo, Professor professor) {
 		Professor professorSalvo = buscarProfessorPeloCodigo(codigo);
 		fotoService.atualizar(professorSalvo.getFoto(), professor.getFoto());
-		BeanUtils.copyProperties(professor, professorSalvo, "idProfessor","usuario");
+		BeanUtils.copyProperties(professor, professorSalvo, "codigo","usuario");
 		return professorRepository.save(professorSalvo);
 	}
 

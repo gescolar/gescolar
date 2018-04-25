@@ -39,7 +39,11 @@ public class Responsavel implements Serializable{
 	@Length(min=4, max= 50)
 	private String nome;
 	
+	
 	@NotNull
+	@Length(max= 50)
+	private String cpf;
+	
 	@Length(max= 50)
 	private String parentesco;
 	
@@ -156,6 +160,19 @@ public class Responsavel implements Serializable{
 
 	public void setAlunosList(List<Aluno> alunosList) {
 		this.alunosList = alunosList;
+	}
+
+	
+	
+	
+
+	public String getCpf() {
+		return cpf;
+	}
+
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 
