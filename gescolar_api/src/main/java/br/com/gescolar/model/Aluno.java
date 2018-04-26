@@ -61,7 +61,7 @@ public class Aluno  implements Serializable, S3UrlFoto{
 	@JoinTable(name = "responsavel_aluno", 
 	joinColumns = @JoinColumn(name = "codigo_aluno"), 
 	inverseJoinColumns = @JoinColumn(name = "codigo_responsavel"))
-	private List<Responsavel> responsaveisList;
+	private List<Responsavel> responsaveis;
 	
 	@NotNull
 	@ManyToOne
@@ -124,12 +124,14 @@ public class Aluno  implements Serializable, S3UrlFoto{
 		this.sexo = sexo;
 	}
 
-	public List<Responsavel> getResponsaveisList() {
-		return responsaveisList;
+	
+
+	public List<Responsavel> getResponsaveis() {
+		return responsaveis;
 	}
 
-	public void setResponsaveisList(List<Responsavel> responsaveisList) {
-		this.responsaveisList = responsaveisList;
+	public void setResponsaveis(List<Responsavel> responsaveis) {
+		this.responsaveis = responsaveis;
 	}
 
 	public Turma getTurma() {

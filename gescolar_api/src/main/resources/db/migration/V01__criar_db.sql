@@ -255,14 +255,7 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`responsavel` (
   `celular` VARCHAR(50) NULL DEFAULT NULL,
   `sexo` VARCHAR(1) NULL DEFAULT NULL,
   `email` VARCHAR(50) NULL DEFAULT NULL,
-  `codigo_usuario` INT(11) NOT NULL,
-  PRIMARY KEY (`codigo`),
-  INDEX `fk_responsavel_usuario1_idx` (`codigo_usuario` ASC),
-  CONSTRAINT `fk_responsavel_usuario1`
-    FOREIGN KEY (`codigo_usuario`)
-    REFERENCES `gescolar`.`usuario` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`codigo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 

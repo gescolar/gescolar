@@ -13,12 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -59,13 +60,7 @@ public class Responsavel implements Serializable{
 	@Length(max= 50)
 	private String sexo;
 	
-	
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "codigo_usuario")
-	private Usuario usuario;
-	
-	
+	@JsonIgnore
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name = "responsavel_aluno", 
 	joinColumns = @JoinColumn(name = "codigo_responsavel"), 
@@ -143,15 +138,6 @@ public class Responsavel implements Serializable{
 	}
 
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
 
 	public List<Aluno> getAlunosList() {
 		return alunosList;
@@ -163,9 +149,6 @@ public class Responsavel implements Serializable{
 	}
 
 	
-	
-	
-
 	public String getCpf() {
 		return cpf;
 	}
