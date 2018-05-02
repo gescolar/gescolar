@@ -30,9 +30,19 @@ public class AlunoService {
 	
 	public Aluno atualizar(Long codigo, Aluno aluno) {
 		Aluno alunoSalvo = buscarAlunoPeloCodigo(codigo);
+		setResponsaveis(aluno, alunoSalvo);
 		fotoService.atualizar(alunoSalvo.getFoto(), aluno.getFoto());
-		BeanUtils.copyProperties(aluno, alunoSalvo, "idAluno","usuario");
+		BeanUtils.copyProperties(aluno, alunoSalvo, "idAluno","usuario","responsaveis");
 		return alunoRepository.save(alunoSalvo);
+	}
+
+	private void setResponsaveis(Aluno aluno, Aluno alunoSalvo) {
+		if (!alunoSalvo.getResponsaveis().isEmpty()) {
+			alunoSalvo.getResponsaveis().clear();
+			alunoSalvo.getResponsaveis().addAll(aluno.getResponsaveis());
+		} else {
+			alunoSalvo.setResponsaveis(aluno.getResponsaveis());
+		}
 	}
 	
 	public Aluno deletar() {

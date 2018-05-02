@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`responsavel` (
   `codigo` INT(11) NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(50) NOT NULL,
   `cpf` VARCHAR(50) NOT NULL,
-  `parentesco` VARCHAR(50) NOT NULL,
+  `parentesco` VARCHAR(50) NULL DEFAULT NULL,
   `telefone` VARCHAR(50) NULL DEFAULT NULL,
   `celular` VARCHAR(50) NULL DEFAULT NULL,
   `sexo` VARCHAR(1) NULL DEFAULT NULL,

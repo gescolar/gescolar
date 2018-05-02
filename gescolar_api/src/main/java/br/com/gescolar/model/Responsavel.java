@@ -2,24 +2,17 @@ package br.com.gescolar.model;
 
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -60,13 +53,6 @@ public class Responsavel implements Serializable{
 	@Length(max= 50)
 	private String sexo;
 	
-	@JsonIgnore
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name = "responsavel_aluno", 
-	joinColumns = @JoinColumn(name = "codigo_responsavel"), 
-	inverseJoinColumns = @JoinColumn(name = "codigo_aluno"))
-	private List<Aluno> alunosList;
-
 
 	public Long getCodigo() {
 		return codigo;
@@ -138,15 +124,6 @@ public class Responsavel implements Serializable{
 	}
 
 
-
-	public List<Aluno> getAlunosList() {
-		return alunosList;
-	}
-
-
-	public void setAlunosList(List<Aluno> alunosList) {
-		this.alunosList = alunosList;
-	}
 
 	
 	public String getCpf() {
