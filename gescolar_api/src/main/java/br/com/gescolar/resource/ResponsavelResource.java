@@ -72,9 +72,9 @@ public class ResponsavelResource {
 	}
 
 	
-	@GetMapping("/cpfExistente/{cpf}")
+	@GetMapping("/cpfExistente")
 	@ResponseBody
-	public ResponseEntity<Boolean> isValid(@PathVariable String cpf, @RequestParam (required = false, defaultValue = "") String codigo) {
+	public ResponseEntity<Boolean> isValid(@RequestParam (required = true, defaultValue = "") String cpf, @RequestParam (required = false, defaultValue = "") String codigo) {
 		Long codigoLong = null;
 		if (!StringUtils.isEmpty(codigo)) codigoLong = new Long(codigo); 
 		return ResponseEntity.ok(responsavelService.verificaCpf(cpf,codigoLong));
