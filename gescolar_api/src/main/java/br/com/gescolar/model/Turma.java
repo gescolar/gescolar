@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.gescolar.types.SerieEnum;
+import br.com.gescolar.types.TurnoEnum;
 
 
 @Entity
@@ -35,34 +40,40 @@ public class Turma implements Serializable {
 	
 	@NotNull
 	@NotBlank
-	@Column(name="nome")
 	private String nome;
+	
+	private String sala;
+	
+	@Enumerated(EnumType.STRING)
+	private SerieEnum serie;
+	
+	@Enumerated(EnumType.STRING)
+	private TurnoEnum turno;
+	
+	@Column(name="quant_dias_semana")
+	private Integer quantidadeDiasSemana;
+	
+	private Integer vagas;
+	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Aluno> alunos;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<DisciplinaTurma> disciplinas;
+	
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<TurmaPeriodo> periodos;
 	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "codigo_periodo_letivo")
 	@JsonIgnore
 	private PeriodoLetivo periodoLetivo;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Aluno> alunosList;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "turma", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<DisciplinaTurma> disciplinasList;
-	
-	private String serie;
-	
-	private String sala;
-	
-	@Column(name="quant_periodos")
-	private Integer quantPeriodosSemana;
-	
-	@Column(name="quant_dias")
-	private Integer quantDias;
-	
-	private Integer vagas;
 
 	public Long getCodigo() {
 		return codigo;
@@ -72,36 +83,12 @@ public class Turma implements Serializable {
 		this.codigo = codigo;
 	}
 
-	public PeriodoLetivo getPeriodoLetivo() {
-		return periodoLetivo;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setPeriodoLetivo(PeriodoLetivo periodoLetivo) {
-		this.periodoLetivo = periodoLetivo;
-	}
-
-	public List<Aluno> getAlunosList() {
-		return alunosList;
-	}
-
-	public void setAlunosList(List<Aluno> alunosList) {
-		this.alunosList = alunosList;
-	}
-
-	public List<DisciplinaTurma> getDisciplinasList() {
-		return disciplinasList;
-	}
-
-	public void setDisciplinasList(List<DisciplinaTurma> disciplinasList) {
-		this.disciplinasList = disciplinasList;
-	}
-
-	public String getSerie() {
-		return serie;
-	}
-
-	public void setSerie(String serie) {
-		this.serie = serie;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getSala() {
@@ -112,22 +99,61 @@ public class Turma implements Serializable {
 		this.sala = sala;
 	}
 
-	public Integer getQuantPeriodosSemana() {
-		return quantPeriodosSemana;
+	public SerieEnum getSerie() {
+		return serie;
 	}
 
-	public void setQuantPeriodosSemana(Integer quantPeriodosSemana) {
-		this.quantPeriodosSemana = quantPeriodosSemana;
+	public void setSerie(SerieEnum serie) {
+		this.serie = serie;
 	}
 
-	public Integer getQuantDias() {
-		return quantDias;
+	public TurnoEnum getTurno() {
+		return turno;
 	}
 
-	public void setQuantDias(Integer quantDias) {
-		this.quantDias = quantDias;
+	public void setTurno(TurnoEnum turno) {
+		this.turno = turno;
 	}
 
+	public Integer getQuantidadeDiasSemana() {
+		return quantidadeDiasSemana;
+	}
+
+	public void setQuantidadeDiasSemana(Integer quantidadeDiasSemana) {
+		this.quantidadeDiasSemana = quantidadeDiasSemana;
+	}
+
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
+
+	public List<DisciplinaTurma> getDisciplinas() {
+		return disciplinas;
+	}
+
+	public void setDisciplinas(List<DisciplinaTurma> disciplinas) {
+		this.disciplinas = disciplinas;
+	}
+
+	public List<TurmaPeriodo> getPeriodos() {
+		return periodos;
+	}
+
+	public void setPeriodos(List<TurmaPeriodo> periodos) {
+		this.periodos = periodos;
+	}
+
+	public PeriodoLetivo getPeriodoLetivo() {
+		return periodoLetivo;
+	}
+
+	public void setPeriodoLetivo(PeriodoLetivo periodoLetivo) {
+		this.periodoLetivo = periodoLetivo;
+	}
 	
 	public Integer getVagas() {
 		return vagas;
@@ -137,14 +163,6 @@ public class Turma implements Serializable {
 		this.vagas = vagas;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -169,7 +187,8 @@ public class Turma implements Serializable {
 			return false;
 		return true;
 	}
-
+	
+	
 	
 	
 	

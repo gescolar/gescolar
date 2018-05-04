@@ -18,6 +18,45 @@ CREATE SCHEMA IF NOT EXISTS `gescolar` DEFAULT CHARACTER SET utf8 ;
 USE `gescolar` ;
 
 -- -----------------------------------------------------
+-- Table `gescolar`.`periodo_letivo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gescolar`.`periodo_letivo` (
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
+  `data_ini` DATE NOT NULL,
+  `data_fim` DATE NOT NULL,
+  `situacao` VARCHAR(45) NOT NULL,
+  `minutos_periodo` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`codigo`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `gescolar`.`turma`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gescolar`.`turma` (
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
+  `nome` VARCHAR(45) NOT NULL,
+  `sala` VARCHAR(45) NULL DEFAULT NULL,
+  `serie` VARCHAR(45) NULL DEFAULT NULL,
+  `turno` VARCHAR(45) NULL DEFAULT NULL,
+  `quant_dias_semana` INT(11) NULL DEFAULT NULL,
+  `codigo_periodo_letivo` INT(11) NOT NULL,
+  `vagas` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `fk_turma_periodo_letivo1_idx` (`codigo_periodo_letivo` ASC),
+  CONSTRAINT `fk_turma_periodo_letivo1`
+    FOREIGN KEY (`codigo_periodo_letivo`)
+    REFERENCES `gescolar`.`periodo_letivo` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 5
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `gescolar`.`tipo_usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`tipo_usuario` (
@@ -26,7 +65,6 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`tipo_usuario` (
   `role` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`codigo`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -52,44 +90,6 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `gescolar`.`periodo_letivo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gescolar`.`periodo_letivo` (
-  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
-  `data_ini` DATE NOT NULL,
-  `data_fim` DATE NOT NULL,
-  `turno` VARCHAR(45) NOT NULL,
-  `situacao` VARCHAR(45) NOT NULL,
-  `minutos_periodo` INT(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
--- Table `gescolar`.`turma`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gescolar`.`turma` (
-  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(45) NOT NULL,
-  `sala` VARCHAR(45) NULL DEFAULT NULL,
-  `quant_periodos` INT(11) NULL DEFAULT NULL,
-  `quant_dias` INT(11) NULL DEFAULT NULL,
-  `serie` VARCHAR(45) NULL DEFAULT NULL,
-  `codigo_periodo_letivo` INT(11) NOT NULL,
-  `vagas` INT NULL,
-  PRIMARY KEY (`codigo`),
-  INDEX `fk_turma_periodo_letivo1_idx` (`codigo_periodo_letivo` ASC),
-  CONSTRAINT `fk_turma_periodo_letivo1`
-    FOREIGN KEY (`codigo_periodo_letivo`)
-    REFERENCES `gescolar`.`periodo_letivo` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `gescolar`.`aluno`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`aluno` (
@@ -103,16 +103,29 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`aluno` (
   PRIMARY KEY (`codigo`),
   INDEX `fk_aluno_usuario_idx` (`codigo_usuario` ASC),
   INDEX `fk_aluno_turma1_idx` (`codigo_turma` ASC),
-  CONSTRAINT `fk_aluno_usuario`
-    FOREIGN KEY (`codigo_usuario`)
-    REFERENCES `gescolar`.`usuario` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_aluno_turma1`
     FOREIGN KEY (`codigo_turma`)
     REFERENCES `gescolar`.`turma` (`codigo`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_aluno_usuario`
+    FOREIGN KEY (`codigo_usuario`)
+    REFERENCES `gescolar`.`usuario` (`codigo`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `gescolar`.`disciplina`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gescolar`.`disciplina` (
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
+  `desc` VARCHAR(300) NULL DEFAULT NULL,
+  `nome` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`codigo`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -143,23 +156,11 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `gescolar`.`disciplina`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gescolar`.`disciplina` (
-  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
-  `desc` VARCHAR(300) NULL DEFAULT NULL,
-  `nome` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`codigo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
-
-
--- -----------------------------------------------------
 -- Table `gescolar`.`discipliana_turma`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gescolar`.`discipliana_turma` (
   `codigo` INT(11) NOT NULL AUTO_INCREMENT,
-  `quant_periodos` INT(11) NULL,
+  `quant_periodos` INT(11) NULL DEFAULT NULL,
   `turma_codigo` INT(11) NOT NULL,
   `codigo_professo` INT(11) NOT NULL,
   `codigo_disciplina` INT(11) NOT NULL,
@@ -167,9 +168,9 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`discipliana_turma` (
   INDEX `fk_discipliana_turma_turma1_idx` (`turma_codigo` ASC),
   INDEX `fk_discipliana_turma_professor1_idx` (`codigo_professo` ASC),
   INDEX `fk_discipliana_turma_disciplina1_idx` (`codigo_disciplina` ASC),
-  CONSTRAINT `fk_discipliana_turma_turma1`
-    FOREIGN KEY (`turma_codigo`)
-    REFERENCES `gescolar`.`turma` (`codigo`)
+  CONSTRAINT `fk_discipliana_turma_disciplina1`
+    FOREIGN KEY (`codigo_disciplina`)
+    REFERENCES `gescolar`.`disciplina` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_discipliana_turma_professor1`
@@ -177,9 +178,9 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`discipliana_turma` (
     REFERENCES `gescolar`.`professor` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_discipliana_turma_disciplina1`
-    FOREIGN KEY (`codigo_disciplina`)
-    REFERENCES `gescolar`.`disciplina` (`codigo`)
+  CONSTRAINT `fk_discipliana_turma_turma1`
+    FOREIGN KEY (`turma_codigo`)
+    REFERENCES `gescolar`.`turma` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -198,6 +199,32 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`avaliacao_disciplina` (
   PRIMARY KEY (`codigo`),
   INDEX `fk_avaliacao_disciplina_discipliana_turma1_idx` (`codigo_discipliana_turma` ASC),
   CONSTRAINT `fk_avaliacao_disciplina_discipliana_turma1`
+    FOREIGN KEY (`codigo_discipliana_turma`)
+    REFERENCES `gescolar`.`discipliana_turma` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `gescolar`.`boletim`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gescolar`.`boletim` (
+  `codigo` INT(11) NOT NULL AUTO_INCREMENT,
+  `nota` DOUBLE NULL DEFAULT NULL,
+  `bi_tri` VARCHAR(45) NULL DEFAULT NULL,
+  `codigo_aluno` INT(11) NOT NULL,
+  `codigo_discipliana_turma` INT(11) NOT NULL,
+  PRIMARY KEY (`codigo`),
+  INDEX `fk_boletim_aluno1_idx` (`codigo_aluno` ASC),
+  INDEX `fk_boletim_discipliana_turma1_idx` (`codigo_discipliana_turma` ASC),
+  CONSTRAINT `fk_boletim_aluno1`
+    FOREIGN KEY (`codigo_aluno`)
+    REFERENCES `gescolar`.`aluno` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_boletim_discipliana_turma1`
     FOREIGN KEY (`codigo_discipliana_turma`)
     REFERENCES `gescolar`.`discipliana_turma` (`codigo`)
     ON DELETE NO ACTION
@@ -229,14 +256,14 @@ CREATE TABLE IF NOT EXISTS `gescolar`.`nota_aulo` (
   PRIMARY KEY (`codigo`, `codigo_aluno`),
   INDEX `fk_nota_aulo_avaliacao_disciplina1_idx` (`codigo_avaliacao_disciplina` ASC),
   INDEX `fk_nota_aulo_aluno1_idx` (`codigo_aluno` ASC),
-  CONSTRAINT `fk_nota_aulo_avaliacao_disciplina1`
-    FOREIGN KEY (`codigo_avaliacao_disciplina`)
-    REFERENCES `gescolar`.`avaliacao_disciplina` (`codigo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_nota_aulo_aluno1`
     FOREIGN KEY (`codigo_aluno`)
     REFERENCES `gescolar`.`aluno` (`codigo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_nota_aulo_avaliacao_disciplina1`
+    FOREIGN KEY (`codigo_avaliacao_disciplina`)
+    REFERENCES `gescolar`.`avaliacao_disciplina` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -284,23 +311,46 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
--- Table `gescolar`.`boletim`
+-- Table `gescolar`.`schema_version`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `gescolar`.`boletim` (
+CREATE TABLE IF NOT EXISTS `gescolar`.`schema_version` (
+  `version_rank` INT(11) NOT NULL,
+  `installed_rank` INT(11) NOT NULL,
+  `version` VARCHAR(50) NOT NULL,
+  `description` VARCHAR(200) NOT NULL,
+  `type` VARCHAR(20) NOT NULL,
+  `script` VARCHAR(1000) NOT NULL,
+  `checksum` INT(11) NULL DEFAULT NULL,
+  `installed_by` VARCHAR(100) NOT NULL,
+  `installed_on` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `execution_time` INT(11) NOT NULL,
+  `success` TINYINT(1) NOT NULL,
+  PRIMARY KEY (`version`),
+  INDEX `schema_version_vr_idx` (`version_rank` ASC),
+  INDEX `schema_version_ir_idx` (`installed_rank` ASC),
+  INDEX `schema_version_s_idx` (`success` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `gescolar`.`TURMA_PERIODO`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `gescolar`.`TURMA_PERIODO` (
   `codigo` INT NOT NULL AUTO_INCREMENT,
-  `nota` DOUBLE NULL,
-  `bi_tri` VARCHAR(45) NULL,
-  `codigo_aluno` INT(11) NOT NULL,
+  `dia` VARCHAR(45) NULL,
+  `periodo` VARCHAR(45) NULL,
+  `turma_codigo` INT(11) NOT NULL,
   `codigo_discipliana_turma` INT(11) NOT NULL,
   PRIMARY KEY (`codigo`),
-  INDEX `fk_boletim_aluno1_idx` (`codigo_aluno` ASC),
-  INDEX `fk_boletim_discipliana_turma1_idx` (`codigo_discipliana_turma` ASC),
-  CONSTRAINT `fk_boletim_aluno1`
-    FOREIGN KEY (`codigo_aluno`)
-    REFERENCES `gescolar`.`aluno` (`codigo`)
+  INDEX `fk_TURMA_PERIODO_turma1_idx` (`turma_codigo` ASC),
+  INDEX `fk_TURMA_PERIODO_discipliana_turma1_idx` (`codigo_discipliana_turma` ASC),
+  CONSTRAINT `fk_TURMA_PERIODO_turma1`
+    FOREIGN KEY (`turma_codigo`)
+    REFERENCES `gescolar`.`turma` (`codigo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_boletim_discipliana_turma1`
+  CONSTRAINT `fk_TURMA_PERIODO_discipliana_turma1`
     FOREIGN KEY (`codigo_discipliana_turma`)
     REFERENCES `gescolar`.`discipliana_turma` (`codigo`)
     ON DELETE NO ACTION

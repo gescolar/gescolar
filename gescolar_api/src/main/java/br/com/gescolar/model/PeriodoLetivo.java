@@ -30,8 +30,7 @@ public class PeriodoLetivo implements Serializable{
 	@NotNull
 	@Column(name="data_fim")
 	private LocalDate dataFim;
-	@NotNull
-	private String turno;
+	
 	@NotNull
 	private String situacao;
 	@NotNull
@@ -58,12 +57,7 @@ public class PeriodoLetivo implements Serializable{
 	public void setDataFim(LocalDate dataFim) {
 		this.dataFim = dataFim;
 	}
-	public String getTurno() {
-		return turno;
-	}
-	public void setTurno(String turno) {
-		this.turno = turno;
-	}
+	
 	public String getSituacao() {
 		return situacao;
 	}
