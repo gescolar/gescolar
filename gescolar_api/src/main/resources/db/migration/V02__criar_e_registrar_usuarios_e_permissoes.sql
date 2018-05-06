@@ -9,10 +9,10 @@ INSERT INTO `gescolar`.`usuario` (`codigo`, `login`, `senha`, `codigo_tipo_usuar
 
 INSERT INTO `gescolar`.`periodo_letivo` (`codigo`, `data_ini`, `data_fim`, `situacao`, `minutos_periodo`) VALUES ('1', '2018-03-01', '2018-12-06', 'A', '45');
 
-INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('1', 'Turma 101 - dia','100', '5', '5', '1', '40');
-INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('2', 'Turma 102- dia' , '101','5', '6', '1', '40');
-INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('3', 'Turma 103 -dia' , '102','5', '5', '1', '40');
-INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('4', 'Turma -104'     , '104','5', '7', '1', '40');
+INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('1', 'Turma 101 - dia','100', '5', 'SEXTA_SERIE', '1', '40');
+INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('2', 'Turma 102- dia' , '101','5', 'SEXTA_SERIE', '1', '40');
+INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('3', 'Turma 103 -dia' , '102','5', 'SEXTA_SERIE', '1', '40');
+INSERT INTO `gescolar`.`turma` (`codigo`, `nome`, `sala`, `quant_dias_semana`, `serie`, `codigo_periodo_letivo`, `vagas`) VALUES ('4', 'Turma -104'     , '104','5', 'SEXTA_SERIE', '1', '40');
 
 
 INSERT INTO `gescolar`.`aluno` (`codigo`, `nome`, `matricula`, `sexo`, `codigo_usuario`, `codigo_turma`) VALUES ('1', 'teste aluno', '12345', 'M', '1', '1');
